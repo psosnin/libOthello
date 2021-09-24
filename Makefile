@@ -1,32 +1,39 @@
 CXX := clang++
-CFLAGS := -O3 -std=c++20 -g
+CFLAGS := -O3 -std=c++20
 INCLUDE := -Iinclude
+PYINCLUDE := -I/usr/include/python3.9
 GTEST := -lgtest
+BOOST := -lboost_python3
 
-TEST_SRC := $(wildcard tests/*.cpp)
-TEST := bin/othello-test
+TEST_SRC := $(wildcard test/*.cpp)
+TEST := test/test
 
-LIB_SRC := $(wildcard src/utils/*.cpp)
+LIB_SRC := $(wildcard src/*.cpp)
+WRAPPER := src/boost/py_wrapper.cpp
 LIB := lib/libothello.so
+PYLIB := lib/pythello.so
 
-SRC := $(wildcard src/*.cpp)
-EXECS := $(patsubst src/%.cpp, bin/%,  $(SRC))
 
-.PHONY: all clean
+.PHONY: all clean pythello test
 
-all: $(EXECS) $(TEST)
+all: pythello
 
-lib/libothello.so: $(LIB_SRC)
+pythello: $(PYLIB)
+
+test: $(TEST)
+
+$(PYLIB): $(LIB) $(LIB_SRC) $(WRAPPER)
+	$(CXX) $(CFLAGS) -shared $(INCLUDE) $(PYINCLUDE) -fPIC $(WRAPPER) $(LIB) -o $(PYLIB) $(BOOST)
+
+$(LIB): $(LIB_SRC) lib
 	$(CXX) $(CFLAGS) -shared $(INCLUDE) -fPIC $(LIB_SRC) -o $(LIB)
 
-$(EXECS): bin/% : src/%.cpp lib/libothello.so
-	$(CXX) $(CFLAGS) $(INCLUDE) $(LIB) -o $@ $<
-
-$(TEST): $(TEST_SRC) lib/libothello.so
+$(TEST): $(TEST_SRC) $(LIB)
 	$(CXX) $(CFLAGS) $(INCLUDE) $(GTEST) $(TEST_SRC) $(LIB) -o $(TEST)
 
-clean: 
-	rm -f obj/*
-	rm -f bin/*
-	rm -f lib/*
+lib: 
+	@mkdir lib
 
+clean: 
+	rm -rf lib
+	rm -f test/test

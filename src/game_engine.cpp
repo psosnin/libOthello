@@ -2,7 +2,7 @@
 #include "move_engine.hpp"
 #include "game_engine.hpp"
 #include <bitset>
-#include <set>
+#include <vector>
 #include <iostream>
 
 using namespace std;
@@ -16,7 +16,7 @@ GameEngine::GameEngine() {
         past1 = 0x0000000810000000; //starting board for black
         past2 = 0x0000001008000000; //starting board for white
         move_count = 0;    
-        updateMoveBoard();
+        __updateMoveBoard();
         game_ended = false;
     }
 
@@ -30,12 +30,12 @@ int GameEngine::playMove(int move) {
         return -2;
     } else if (current_moves == 0) {
         move_count++;
-        updateMoveBoard();
+        __updateMoveBoard();
         return -1;
     } else if ((((unsigned long)0b1 << move) & current_moves) != 0) {
-        flip(move);
+        __flip(move);
         move_count++;
-        updateMoveBoard();
+        __updateMoveBoard();
         return move;
     } else {
         return -3;
@@ -43,7 +43,7 @@ int GameEngine::playMove(int move) {
 }
 
 //updates the current valid moves given the current board states
-void GameEngine::updateMoveBoard() {
+void GameEngine::__updateMoveBoard() {
     if (move_count % 2 == 0) {
         current_moves = move_engine.getMoveBoard(player1, player2);
         if (current_moves == 0 && move_engine.getMoveBoard(player2, player1) == 0) {
@@ -59,13 +59,13 @@ void GameEngine::updateMoveBoard() {
 }
 
 //gets a list of all the possible moves in the current board state
-set<int> GameEngine::getMoveList(bool t) {
-    if (t) {updateMoveBoard();}
+vector<int> GameEngine::__getMoveList(bool t) {
+    if (t) {__updateMoveBoard();}
     return move_engine.getBitList(current_moves);
 }
 
 //flips all of the pieces neccessary when a move is taken
-void GameEngine::flip(int move) {
+void GameEngine::__flip(int move) {
     past1 = player1;
     past2 = player2;
     if (move_count % 2 == 0) {
@@ -90,8 +90,8 @@ int GameEngine::getPlayer() {
     return move_count % 2 == 0;
 }
 
-//returns a set of all the pieces that were flipped or placed on the previous turn
-set<int> GameEngine::getBoardChange(int player) {
+//returns a vector of all the pieces that were flipped or placed on the previous turn
+vector<int> GameEngine::getBoardChange(int player) {
     if (player == 1) {
         return move_engine.getBitList(player1 & ~past1);
     } else {
@@ -121,7 +121,7 @@ void GameEngine::reset() {
     past1 = 0x0000000810000000; //starting board for black
     past2 = 0x0000001008000000; //starting board for white
     move_count = 0;
-    updateMoveBoard();
+    __updateMoveBoard();
     game_ended = false;
 }
 

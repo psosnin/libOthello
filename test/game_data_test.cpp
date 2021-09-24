@@ -44,66 +44,66 @@ void verifyFile(string dfile) {
 
 //test 100,000 game benchmark
 TEST(gameDataTest, benchmarkGames) {
-    verifyFile("data/data.txt");
+    verifyFile("tests/data/data.txt");
 }
 
 TEST(gameDataTest, sampleGames01) {
-    verifyFile("data/data01.txt");
+    verifyFile("tests/data/data01.txt");
 }
 
 TEST(gameDataTest, sampleGames02) {
-    verifyFile("data/data02.txt");
+    verifyFile("tests/data/data02.txt");
 }
 
 TEST(gameDataTest, sampleGames03) {
-    verifyFile("data/data03.txt");
+    verifyFile("tests/data/data03.txt");
 }
 
 TEST(gameDataTest, sampleGames04) {
-    verifyFile("data/data04.txt");
+    verifyFile("tests/data/data04.txt");
 }
 
 TEST(gameDataTest, sampleGames05) {
-    verifyFile("data/data05.txt");
+    verifyFile("tests/data/data05.txt");
 }
 
 TEST(gameDataTest, sampleGames06) {
-    verifyFile("data/data06.txt");
+    verifyFile("tests/data/data06.txt");
 }
 
 TEST(gameDataTest, sampleGames07) {
-    verifyFile("data/data07.txt");
+    verifyFile("tests/data/data07.txt");
 }
 
 TEST(gameDataTest, sampleGames08) {
-    verifyFile("data/data08.txt");
+    verifyFile("tests/data/data08.txt");
 }
 
 TEST(gameDataTest, sampleGames09) {
-    verifyFile("data/data09.txt");
+    verifyFile("tests/data/data09.txt");
 }
 
 TEST(gameDataTest, sampleGames10) {
-    verifyFile("data/data10.txt");
+    verifyFile("tests/data/data10.txt");
 }
 
 TEST(gameDataTest, sampleGames11) {
-    verifyFile("data/data11.txt");
+    verifyFile("tests/data/data11.txt");
 }
 
 TEST(gameDataTest, sampleGames12) {
-    verifyFile("data/data12.txt");
+    verifyFile("tests/data/data12.txt");
 }
 
 
 TEST(gameDataTest, sampleGames13) {
-    verifyFile("data/data13.txt");
+    verifyFile("tests/data/data13.txt");
 }
 
 TEST(gameDataTest, sampleGames14) {
-    verifyFile("data/data14.txt");
+    verifyFile("tests/data/data14.txt");
 }
 
 TEST(gameDataTest, sampleGames15) {
-    verifyFile("data/data15.txt");
+    verifyFile("tests/data/data15.txt");
 }

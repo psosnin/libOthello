@@ -1,6 +1,8 @@
+//clang++ -O3 -std=c++20 -Iinclude  lib/libothello.so -o bin/othello-text example/othello.cpp
+
 #include <game_engine.hpp>
 #include <iostream>
-#include <set>
+#include <vector>
 
 using namespace std;
 
@@ -8,7 +10,7 @@ int main() {
     GameEngine game = GameEngine();
     while (!game.gameEnded()) {
         game.print();
-        set<int> valid_moves = game.getMoveList();
+        vector<int> valid_moves = game.getMoveList();
         for (int i : valid_moves) {cout << i << " ";}
         cout << endl;
 
@@ -19,10 +21,6 @@ int main() {
             while (game.playMove(move) == -3) {
                 cout << "Not a valid move";
                 cin >> move;
-            }
-            set<int> changed = game.getBoardChange(1);
-            for (auto i : changed) {
-                cout << "changed = " << i << endl;
             }
         }
         cin.clear();
@@ -37,10 +35,6 @@ int main() {
             while (game.playMove(move) == -3) {
                 cout << "Not a valid move";
                 cin >> move;
-            }
-            set<int> changed = game.getBoardChange(-1);
-            for (auto i : changed) {
-                cout << "changed = " << i << endl;
             }
         }
         cin.clear();

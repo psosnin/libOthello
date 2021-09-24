@@ -4,3 +4,4 @@ bin/
 data/
 *.swp
 .vscode/
+boost_1_77_0/
