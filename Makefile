@@ -6,7 +6,7 @@ GTEST := -lgtest
 BOOST := -lboost_python3
 
 TEST_SRC := $(wildcard test/*.cpp)
-TEST := test/test
+TEST := othello_test
 
 LIB_SRC := $(wildcard src/*.cpp)
 WRAPPER := src/boost/py_wrapper.cpp
@@ -19,6 +19,8 @@ PYLIB := lib/pythello.so
 all: pythello
 
 pythello: $(PYLIB)
+	rm -rf ../lib
+	cp -rf lib ../lib
 
 test: $(TEST)
 
@@ -29,11 +31,11 @@ $(LIB): $(LIB_SRC) lib
 	$(CXX) $(CFLAGS) -shared $(INCLUDE) -fPIC $(LIB_SRC) -o $(LIB)
 
 $(TEST): $(TEST_SRC) $(LIB)
-	$(CXX) $(CFLAGS) $(INCLUDE) $(GTEST) $(TEST_SRC) $(LIB) -o $(TEST)
+	$(CXX) $(CFLAGS) -g $(INCLUDE) $(GTEST) $(TEST_SRC) $(LIB) -o $(TEST)
 
 lib: 
 	@mkdir lib
 
 clean: 
 	rm -rf lib
-	rm -f test/test
+	rm -f othello_test

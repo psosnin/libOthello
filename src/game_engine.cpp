@@ -68,6 +68,8 @@ vector<int> GameEngine::__getMoveList(bool t) {
 void GameEngine::__flip(int move) {
     past1 = player1;
     past2 = player2;
+    history1[move_count] = past1;
+    history2[move_count] = past2;
     if (move_count % 2 == 0) {
         uint64_t flips = move_engine.getFlipBoard(player1, player2, move);
         player2 &= ~flips;
@@ -87,7 +89,7 @@ void GameEngine::print() {
 //returns the player whos move it is 
 int GameEngine::getPlayer() {
     //1 for black, -1 for white
-    return move_count % 2 == 0;
+    return (move_count % 2 == 0) ? 1 : -1;
 }
 
 //returns a vector of all the pieces that were flipped or placed on the previous turn
@@ -114,6 +116,20 @@ int GameEngine::getScore() {
     return black;
 }
 
+//return the number of counters white has. If the game has ended, then any empty spaces are given to the winner.
+int GameEngine::getWhiteScore() {
+    int black = (bitset<64> (player1)).count();
+    int white = (bitset<64> (player2)).count();
+    int empty = 64 - white - black;
+    if (!game_ended) {
+        return white;
+    } else if (white > black) {
+        return white + empty;
+    } else if (white == black) {
+        return 32;
+    }
+    return white;
+}
 //resets the game
 void GameEngine::reset() {
     player1 = 0x0000000810000000; //starting board for black
@@ -127,4 +143,25 @@ void GameEngine::reset() {
 
 bool GameEngine::gameEnded() {
     return game_ended;
+}
+
+//resets the game engine to the state before the previous move occurred 
+void GameEngine::undoLastMove() {
+    if (move_count == 0) return;
+    player1 = history1[move_count-1];
+    player2 = history2[move_count-1];
+    past1 = history1[move_count-2];
+    past2 = history2[move_count-2];
+    move_count--;
+    game_ended = false;
+    __updateMoveBoard();
+}
+
+//return a vector of all squares that have a black counter
+vector<int> GameEngine::getBlackList(){
+    return move_engine.getBitList(player1);
+}
+//return a vector of all squares that have a white counter
+vector<int> GameEngine::getWhiteList(){
+    return move_engine.getBitList(player2);
 }

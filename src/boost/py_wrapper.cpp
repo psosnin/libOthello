@@ -21,11 +21,18 @@ BOOST_PYTHON_MODULE(pythello)
         .def("getPlayer", &GameEngine::getPlayer)
         .def("getBoardChange", &GameEngine::getBoardChange)
         .def("getScore", &GameEngine::getScore)
+        .def("getWhiteScore", &GameEngine::getWhiteScore)
         .def("reset", &GameEngine::reset)
         .def("gameEnded", &GameEngine::gameEnded)
+        .def("undoLastMove", &GameEngine::undoLastMove)
+        .def("getBlackList", &GameEngine::getBlackList)
+        .def("getWhiteList", &GameEngine::getWhiteList)
+        .def("getBlackBoard", &GameEngine::getBlackBoard)
+        .def("getWhiteBoard", &GameEngine::getWhiteBoard)
     ;
 
     class_<std::vector<int> >("IntVec")
         .def(vector_indexing_suite<std::vector<int> >())
+        .def("size", &vector_indexing_suite<std::vector<int> >::size)
     ;
 }

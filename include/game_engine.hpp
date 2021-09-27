@@ -13,8 +13,14 @@ class GameEngine
         int getPlayer();
         vector<int> getBoardChange(int player);
         int getScore();
+        int getWhiteScore();
         void reset();
         bool gameEnded();
+        void undoLastMove();
+        vector<int> getBlackList();
+        vector<int> getWhiteList();
+        uint64_t getBlackBoard(){return player1;}
+        uint64_t getWhiteBoard(){return player2;}
 
     private:
         void __updateMoveBoard();
@@ -27,5 +33,7 @@ class GameEngine
         uint64_t player2; 
         uint64_t past1;
         uint64_t past2;
+        uint64_t history1[60];
+        uint64_t history2[60];
         void __flip(int move);
     };

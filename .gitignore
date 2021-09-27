@@ -2,6 +2,7 @@ obj/
 lib/
 bin/
 data/
+docs/
 *.swp
 .vscode/
 boost_1_77_0/

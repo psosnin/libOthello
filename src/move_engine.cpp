@@ -144,7 +144,7 @@ int * MoveEngine::__getDiagonalIndex(int * xy) {
 }
 
 
-//a function that returns a bitboard of opponents pieces that are flipped on a move. player and opponent are the current bitboards, move is an integer value representing the number of the bit that the move is on, flip mop is the map of all moves
+//a function that returns a bitboard of opponents pieces that are flipped on a move. player and opponent are the current bitboards, move is an integer value representing the number of the bit that the move is on
 uint64_t MoveEngine::getFlipBoard(uint64_t player, uint64_t opponent, int move){
     // get x, y, d and ad
     int * xy = __getXYIndex(move);
