@@ -6,7 +6,7 @@ GTEST := -lgtest
 BOOST := -lboost_python3
 
 TEST_SRC := $(wildcard test/*.cpp)
-TEST := othello_test
+TEST := test/test
 
 LIB_SRC := $(wildcard src/*.cpp)
 WRAPPER := src/boost/py_wrapper.cpp
@@ -38,4 +38,4 @@ lib:
 
 clean: 
 	rm -rf lib
-	rm -f othello_test
+	rm -f $(TEST)

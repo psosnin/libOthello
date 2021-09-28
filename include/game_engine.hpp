@@ -19,21 +19,18 @@ class GameEngine
         void undoLastMove();
         vector<int> getBlackList();
         vector<int> getWhiteList();
-        uint64_t getBlackBoard(){return player1;}
-        uint64_t getWhiteBoard(){return player2;}
+        uint64_t getBlackBoard(){return board1[count];}
+        uint64_t getWhiteBoard(){return board2[count];}
 
     private:
         void __updateMoveBoard();
         static MoveEngine move_engine;
         bool game_ended;
-        int move_count;
+        int count;
         vector<int> __getMoveList(bool t = false);
         uint64_t current_moves;
-        uint64_t player1;
-        uint64_t player2; 
-        uint64_t past1;
-        uint64_t past2;
-        uint64_t history1[60];
-        uint64_t history2[60];
+        int player;
+        uint64_t board1[62];
+        uint64_t board2[62];
         void __flip(int move);
     };
