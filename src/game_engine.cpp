@@ -17,6 +17,7 @@ GameEngine::GameEngine() {
         board2[1] = 0x0000001008000000;
         player = 1; //1 for black, -1 for white
         count = 1;
+        undone = 0;
         __updateMoveBoard();
         game_ended = false;
     }
@@ -36,6 +37,7 @@ int GameEngine::playMove(int move) {
     } else if ((((unsigned long)0b1 << move) & current_moves) != 0) {
         __flip(move);
         player *= -1;
+        undone = 0;
         count++;
         __updateMoveBoard();
         return move;
@@ -131,6 +133,7 @@ int GameEngine::getWhiteScore() {
 //resets the game
 void GameEngine::reset() {
     count = 1;
+    undone = 0;
     player = 1;
     __updateMoveBoard();
     game_ended = false;
@@ -143,9 +146,19 @@ bool GameEngine::gameEnded() {
 //resets the game engine to the state before the previous move occurred 
 void GameEngine::undoLastMove() {
     if (count <= 1) return;
+    undone++;
     count--;
     player *= -1;
     game_ended = false;
+    __updateMoveBoard();
+}
+
+//if there is currently a move that has been undone, replay that move
+void GameEngine::redoNextMove() {
+    if (undone == 0) return;
+    undone--;
+    count++;
+    player *= -1;
     __updateMoveBoard();
 }
 
