@@ -30,6 +30,7 @@ BOOST_PYTHON_MODULE(pythello)
         .def("getWhiteList", &GameEngine::getWhiteList)
         .def("getBlackBoard", &GameEngine::getBlackBoard)
         .def("getWhiteBoard", &GameEngine::getWhiteBoard)
+        .def("getMoveCount", &GameEngine::getMoveCount)
     ;
 
     class_<std::vector<int> >("IntVec")

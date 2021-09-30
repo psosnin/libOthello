@@ -14,6 +14,7 @@ class GameEngine
         vector<int> getBoardChange(int player);
         int getScore();
         int getWhiteScore();
+        int getMoveCount();
         void reset();
         bool gameEnded();
         void undoLastMove();

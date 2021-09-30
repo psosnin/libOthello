@@ -170,3 +170,7 @@ vector<int> GameEngine::getBlackList(){
 vector<int> GameEngine::getWhiteList(){
     return move_engine.getBitList(board2[count]);
 }
+
+int GameEngine::getMoveCount(){
+    return count;
+}
