@@ -31,7 +31,9 @@ int GameEngine::playMove(int move) {
     if (game_ended) {
         return -2;
     } else if (current_moves == 0) {
+        passes.set(count);
         player *= -1;
+        undone = 0;
         __updateMoveBoard();
         return -1;
     } else if ((((unsigned long)0b1 << move) & current_moves) != 0) {
@@ -39,6 +41,7 @@ int GameEngine::playMove(int move) {
         player *= -1;
         undone = 0;
         count++;
+        passes.reset(count);
         __updateMoveBoard();
         return move;
     } else {
@@ -135,6 +138,7 @@ void GameEngine::reset() {
     count = 1;
     undone = 0;
     player = 1;
+    passes.reset();
     __updateMoveBoard();
     game_ended = false;
 }
@@ -146,16 +150,20 @@ bool GameEngine::gameEnded() {
 //resets the game engine to the state before the previous move occurred 
 void GameEngine::undoLastMove() {
     if (count <= 1) return;
-    undone++;
-    count--;
     player *= -1;
+    undone++;
+    if(!passes[count]) {
+        count--;
+    } else {
+        passes.reset(count);
+    }
     game_ended = false;
     __updateMoveBoard();
 }
 
 //if there is currently a move that has been undone, replay that move
 void GameEngine::redoNextMove() {
-    if (undone == 0) return;
+    if (undone == 0 || count >= 61) return;
     undone--;
     count++;
     player *= -1;
@@ -173,4 +181,8 @@ vector<int> GameEngine::getWhiteList(){
 
 int GameEngine::getMoveCount(){
     return count;
+}
+
+int GameEngine::getNoMoves() {
+    return move_engine.getNoBits(current_moves);
 }

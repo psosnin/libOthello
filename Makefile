@@ -3,7 +3,7 @@ CFLAGS := -O3 -std=c++20
 INCLUDE := -Iinclude
 PYINCLUDE := -I/usr/include/python3.9
 GTEST := -lgtest
-BOOST := -lboost_python3
+BOOST := -lpython3.9 -lboost_python3
 
 TEST_SRC := $(wildcard test/*.cpp)
 TEST := test/test

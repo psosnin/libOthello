@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <bitset>
 #include "move_engine.hpp"
 using namespace std;
 
@@ -15,6 +16,8 @@ class GameEngine
         int getScore();
         int getWhiteScore();
         int getMoveCount();
+        //return the no of moves possible in the position
+        int getNoMoves();
         void reset();
         bool gameEnded();
         void undoLastMove();
@@ -23,10 +26,10 @@ class GameEngine
         vector<int> getWhiteList();
         uint64_t getBlackBoard(){return board1[count];}
         uint64_t getWhiteBoard(){return board2[count];}
+        static MoveEngine move_engine;
 
     private:
         void __updateMoveBoard();
-        static MoveEngine move_engine;
         bool game_ended;
         int count; // index of the current move
         int undone; // no of moves undone since last move was played
@@ -35,5 +38,6 @@ class GameEngine
         int player; // holds player to move, 1 for balck, -1 for white
         uint64_t board1[62];
         uint64_t board2[62];
+        bitset<62> passes = 0; //records which moves contain passes or not
         void __flip(int move);
     };

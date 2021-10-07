@@ -47,67 +47,67 @@ void verifyFile(string dfile) {
 }
 
 //test 100,000 game benchmark
-TEST(gameDataTest, benchmarkGames) {
+TEST(DISABLED_gameDataTest, benchmarkGames) {
     verifyFile("data/data.txt");
 }
 
-TEST(gameDataTest, testCorrect01) {
+TEST(DISABLED_gameDataTest, testCorrect01) {
     verifyFile("data/data01.txt");
 }
 
-TEST(gameDataTest, testCorrect02) {
+TEST(DISABLED_gameDataTest, testCorrect02) {
     verifyFile("data/data02.txt");
 }
 
-TEST(gameDataTest, testCorrect03) {
+TEST(DISABLED_gameDataTest, testCorrect03) {
     verifyFile("data/data03.txt");
 }
 
-TEST(gameDataTest, testCorrect04) {
+TEST(DISABLED_gameDataTest, testCorrect04) {
     verifyFile("data/data04.txt");
 }
 
-TEST(gameDataTest, testCorrect05) {
+TEST(DISABLED_gameDataTest, testCorrect05) {
     verifyFile("data/data05.txt");
 }
 
-TEST(gameDataTest, testCorrect06) {
+TEST(DISABLED_gameDataTest, testCorrect06) {
     verifyFile("data/data06.txt");
 }
 
-TEST(gameDataTest, testCorrect07) {
+TEST(DISABLED_gameDataTest, testCorrect07) {
     verifyFile("data/data07.txt");
 }
 
-TEST(gameDataTest, testCorrect08) {
+TEST(DISABLED_gameDataTest, testCorrect08) {
     verifyFile("data/data08.txt");
 }
 
-TEST(gameDataTest, testCorrect09) {
+TEST(DISABLED_gameDataTest, testCorrect09) {
     verifyFile("data/data09.txt");
 }
 
-TEST(gameDataTest, testCorrect10) {
+TEST(DISABLED_gameDataTest, testCorrect10) {
     verifyFile("data/data10.txt");
 }
 
-TEST(gameDataTest, testCorrect11) {
+TEST(DISABLED_gameDataTest, testCorrect11) {
     verifyFile("data/data11.txt");
 }
 
-TEST(gameDataTest, testCorrect12) {
+TEST(DISABLED_gameDataTest, testCorrect12) {
     verifyFile("data/data12.txt");
 }
 
 
-TEST(gameDataTest, testCorrect13) {
+TEST(DISABLED_gameDataTest, testCorrect13) {
     verifyFile("data/data13.txt");
 }
 
-TEST(gameDataTest, testCorrect14) {
+TEST(DISABLED_gameDataTest, testCorrect14) {
     verifyFile("data/data14.txt");
 }
 
-TEST(gameDataTest, testCorrect15) {
+TEST(DISABLED_gameDataTest, testCorrect15) {
     verifyFile("data/data15.txt");
 }
