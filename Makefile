@@ -1,5 +1,5 @@
 CXX := clang++
-CFLAGS := -O3 -std=c++20
+CFLAGS := -O3 -std=c++20 -g
 INCLUDE := -Iinclude
 PYINCLUDE := -I/usr/include/python3.9
 GTEST := -lgtest
@@ -31,7 +31,7 @@ $(LIB): $(LIB_SRC) lib
 	$(CXX) $(CFLAGS) -shared $(INCLUDE) -fPIC $(LIB_SRC) -o $(LIB)
 
 $(TEST): $(TEST_SRC) $(LIB)
-	$(CXX) $(CFLAGS) -g $(INCLUDE) $(GTEST) $(TEST_SRC) $(LIB) -o $(TEST)
+	$(CXX) $(CFLAGS) $(INCLUDE) $(GTEST) $(TEST_SRC) $(LIB) -o $(TEST)
 
 lib: 
 	@mkdir lib

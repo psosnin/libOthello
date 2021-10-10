@@ -30,12 +30,6 @@ class Mobility : public Evaluation {
         static int eval(GameEngine* engine);
 };
 
-class MobilityDisks : public Evaluation {
-    public:
-        //return no of black moves - no of white disks
-        static int eval(GameEngine* engine);
-};
-
 class Pattern : public Evaluation {
     public:
         //return pattern based evaluation - disks are worth 1, but disks on corner squares are worth 1000
@@ -59,19 +53,25 @@ class Naive : public Search{
 class Minimax : public Search{
     public:
         //perform a minimax tree search to a given depth and return the best move
-        static int search(GameEngine* engine, fptr evaluation, int depth = 6);
+        static int search(GameEngine* engine, fptr evaluation, int depth = 5);
 };
 
 class Alphabeta : public Search{
     public:
         //perform a minimax with alpha beta pruning tree search and return the best move
-        static int search(GameEngine* engine, fptr evaluation, int depth = 5);
+        static int search(GameEngine* engine, fptr evaluation, int depth = 7);
+};
+
+class AlphabetaFast : public Search{ 
+    public:
+        //perform a minimax with alpha beta pruning tree search, multithreading and return the best move
+        static int search(GameEngine* engine, fptr evaluation, int depth = 7);
 };
 
 class MCTS : public Search{
     public:
         //perform a Monte Carlo Tree search to a given depth and no of simulations, then return the best move
-        static int search(GameEngine* engine, fptr evaluation, int depth = 5, int sims = 1000);
+        static int search(GameEngine* engine, fptr evaluation = nullptr, int sims = 10000);
 };
 
 //A strategy takes in a board state (Game Engine), and returns a valid move to play

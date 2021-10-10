@@ -69,13 +69,24 @@ BOOST_PYTHON_MODULE(pythello)
         .def("move", &StrategyEngine<Minimax, Mobility>::move)
         ;
 
-    class_<StrategyEngine<Minimax, MobilityDisks>>("MinimaxMobilityDisks")
-        .def("evaluate", &StrategyEngine<Minimax, MobilityDisks>::evaluate)
-        .def("move", &StrategyEngine<Minimax, MobilityDisks>::move)
-        ;
-
     class_<StrategyEngine<Minimax, Pattern>>("MinimaxPattern")
         .def("evaluate", &StrategyEngine<Minimax, Pattern>::evaluate)
         .def("move", &StrategyEngine<Minimax, Pattern>::move)
+        ;
+
+    class_<StrategyEngine<Alphabeta, Pattern>>("AlphabetaPattern")
+        .def("evaluate", &StrategyEngine<Alphabeta, Pattern>::evaluate)
+        .def("move", &StrategyEngine<Alphabeta, Pattern>::move)
+        ;
+
+    class_<StrategyEngine<AlphabetaFast, Pattern>>("AlphabetaFast")
+        .def("evaluate", &StrategyEngine<AlphabetaFast, Pattern>::evaluate)
+        .def("move", &StrategyEngine<AlphabetaFast, Pattern>::move)
+        ;
+
+
+    class_<StrategyEngine<MCTS, Pattern>>("MCTS")
+        .def("evaluate", &StrategyEngine<MCTS, Pattern>::evaluate)
+        .def("move", &StrategyEngine<MCTS, Pattern>::move)
         ;
 }

@@ -21,6 +21,8 @@ class MoveEngine {
         uint64_t getMoveBoard(uint64_t player, uint64_t opponent);
         //modifies player and opponent's bitboards as the move int was played
         void playMove(uint64_t * player, uint64_t * opponent, int move);
+        //return a vector of all the possible moves in the position
+        vector<int> getMoveList(uint64_t player, uint64_t opponent) {return getBitList(getMoveBoard(player, opponent));};
 
     private:
         //a function that returns a key into the flip_map given a black row, a white row and a move
