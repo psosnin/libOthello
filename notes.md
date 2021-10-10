@@ -63,14 +63,6 @@ _  _  10 9  8  7  6  5       _  4  4  4  4  4  4  4
 ```
 the anti diagonals can be obtained by taking the diagonal of the horizontal flip. diagonals are indexed from 0-10
 
-## TODO:
-
-1. be able to move back through previous moves
-2. show move history
-3. Replace flipH with flipV
-4. Add some parallelism
-5. Add an opponent
-
 ## Performance Benchmarks:
 Version 1.0: 
 
